@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>创建socket.io客户端</title>
+</head>
+<body>
+<input type="text" name="" id="input">
+<script type="text/javascript" src = "/socket.io/socket.io.js"></script>
+   <script type="text/javascript">
+   	   var socket = io.connect();
+       //io.connect方法返回一个socket对象，代表一个用于与服务器端建立连接的客户端socket端口对象
+       socket.on('message',function(data) {
+       	  //当接收到服务器端发送数据时，触发客户端socket端口对象的message事件
+       	  var id = document.getElementById('input');
+       	  id.value = '服务器给你发送了 "' + data + '"';
+       	  socket.send('已收到服务器发送的"' + data + '"');
+       });
+       socket.on('disconnect',function(){
+       	//该回调函数不使用任何参数
+       	alert('服务器断开连接');
+       })
+   </script>
+</body>
+</html>

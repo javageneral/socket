@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>保存用户数据</title>
+	<script type="text/javascript" src = "/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+         var socket = io.connect();
+         function setnickname() {
+         	socket.emit('setnickname',document.getElementById('nickname').value);	
+         }
+         function getnickname(){
+         	socket.emit('getnickname',socket.nickname);
+         }
+         socket.on('sendnickname',function(data){
+         	console.log('我的昵称为:' + data);
+         });
+         socket.on('err',function(data){
+         	console.log('服务器出错，错误信息为:' + data);
+         });
+    </script>
+</head>
+<body>
+<input type="text" name="" id="nickname">
+<input type="button" name="" onclick="setnickname()" value="设置昵称">
+<input type="button" name="" onclick="getnickname()" value="获取昵称">
+</body>
+</html>
